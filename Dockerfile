@@ -8,7 +8,9 @@ MAINTAINER Nuxeo <contact@nuxeo.com>
 RUN apt-add-repository ppa:chris-lea/node.js
 
 # Install dependencies
-RUN apt-get install -y nodejs npm
+RUN apt-get update && \
+    apt-get dist-upgrade -y
+RUN apt-get install -y nodejs
 RUN npm install -g git://github.com/arkenio/etcdump.git#v0.1.0
 ADD etcdump.sh /bin/etcdump.sh
 ADD config-arken.json /root/config-arken.json
