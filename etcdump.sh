@@ -3,18 +3,18 @@
 /bin/write-awscli-conf.sh
 
 NOW=`date +"%Y_%m_%d-%H_%M"`
-
+DUMPER=/usr/lib/node_modules/etcdump/bin/etcdump
 
 # dump etcd
 echo "Dumping arken etcd"
-nodejs  /usr/local/bin/etcdump --config /root/config-arken.json --file etcd_dump_arken_$NOW.json dump
+nodejs $DUMPER --config /root/config-arken.json --file etcd_dump_arken_$NOW.json dump
 if [ ! $? -eq 0 ]; then
   echo "Error while dumping arken etcd."
 else
   echo "Successfuly dumped arken etcd DB."
 fi
 echo "Dumping fleet etcd"
-nodejs  /usr/local/bin/etcdump --config /root/config-fleet.json --file etcd_dump_fleet_$NOW.json dump
+nodejs $DUMPER --config /root/config-fleet.json --file etcd_dump_fleet_$NOW.json dump
 if [ ! $? -eq 0 ]; then
   echo "Error while dumping fleet etcd."
 else
